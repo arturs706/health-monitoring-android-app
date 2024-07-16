@@ -6,11 +6,12 @@ import uk.co.aipainapp.domain.model.SocialLoginRequest
 
 class FacebookLoginRepositoryImpl(private val apiService: ApiService) : FacebookLoginRepository {
     override suspend fun facebooklogin(
-        social_id: String,
+        socialId: String,
         email: String,
-        full_name: String
+        fullName: String,
+        authMethod: String
     ): LoginResponse {
-        val response = SocialLoginRequest(social_id, email, full_name)
+        val response = SocialLoginRequest(socialId, email, fullName, authMethod)
         return apiService.facebooklogin(response)
     }
 }

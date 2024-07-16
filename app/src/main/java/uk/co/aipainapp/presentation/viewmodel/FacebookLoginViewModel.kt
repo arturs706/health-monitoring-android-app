@@ -1,6 +1,7 @@
 package uk.co.aipainapp.presentation.viewmodel
 
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -41,14 +42,17 @@ class FacebookLoginViewModel(private val loginRepository: FacebookLoginRepositor
                 val email = jsonObject?.getString("email")
                 val id = jsonObject?.getString("id")
                 val fullName = jsonObject?.getString("name")
-
+                Log.e("Facebook Sign-In", "Facebook sign-in success: $email")
+                Log.e("Facebook Sign-In", "Facebook sign-in success: $id")
+                Log.e("Facebook Sign-In", "Facebook sign-in success: $fullName")
                 if (email != null) {
                     viewModelScope.launch(Dispatchers.IO) {
                         try {
-                            val response = loginRepository.facebooklogin(id.toString(), email.toString(), fullName.toString())
+                            val response = loginRepository.facebooklogin(id.toString(), email.toString(), fullName.toString(), "FACEBOOK")
                             withContext(Dispatchers.Main) {
                                 if (response.status == "success") {
-                                    loginResponse.value = LoginResponse(email, "success")
+                                    // FIXME: This is a bug. The email should not be wrapped in quotes
+                                    loginResponse.value = LoginResponse(email, "success", "Facebook")
                                     showLoginSuccessDialog()
                                 } else {
                                     showLoginErrorDialog()

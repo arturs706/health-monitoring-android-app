@@ -22,12 +22,21 @@ class GoogleLoginViewModel(private val loginRepository: GoogleLoginRepository) :
 
         try {
             val account = task?.getResult(ApiException::class.java)
+            var familyName = account?.familyName
+            var givenName = account?.givenName
+            var fullName: String
             if (account != null) {
-                var fullName = account.givenName + account.familyName
-               try {
-                   val response = loginRepository.googlelogin(account.id.toString(), account.email.toString(), fullName)
+                if (familyName != null && givenName != null) {
+                    fullName = "$givenName $familyName"
+                } else {
+                    fullName = account.displayName.toString()
+                }
+
+                try {
+                   val response = loginRepository.googlelogin(account.id.toString(), account.email.toString(), fullName, "GOOGLE")
                    if (response.status == "success") {
-                       loginResponse.value = LoginResponse("${account.email}\"", "success")
+                       // FIXME: This is a bug. The email should not be wrapped in quotes
+                       loginResponse.value = LoginResponse("${account.email}\"",  "success", "Google")
                        showLoginSuccessDialog()
                    } else {
                        showLoginErrorDialog()

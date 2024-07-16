@@ -1,7 +1,7 @@
 package uk.co.aipainapp.domain.model
 
 data class LoginResponse(
-    val email: String? = null,
-    val status: String,
-    val errorMessage: String? = null
+    val accessToken: String? = null,
+    val refreshToken: String? = null,
+    val status: String
 )

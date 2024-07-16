@@ -37,7 +37,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             loginErrorResponse.value = null
 
             try {
-                val response = loginRepository.login(username.value, password.value)
+                val response = loginRepository.login(username.value, password.value, "LOCAL")
                 if (response.status == "success") {
                     loginResponse.value = response
                     showLoginSuccessDialog()

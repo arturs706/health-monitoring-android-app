@@ -1,7 +1,8 @@
 package uk.co.aipainapp.domain.model
 
 data class SocialLoginRequest (
-    val social_id: String,
+    val socialId: String,
     val email: String,
-    val full_name: String
+    val fullName: String,
+    val authMethod: String
 )

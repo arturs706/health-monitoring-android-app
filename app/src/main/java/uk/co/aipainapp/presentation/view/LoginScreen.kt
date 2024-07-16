@@ -111,7 +111,7 @@ fun LoginScreen(navController: NavController, googleLoginViewModel: GoogleLoginV
     if (loginResponse != null) {
         Modal(
             title = "Login Successful",
-            message = "You have successfully logged in with email: ${loginResponse!!.email}",
+            message = "Login successful!",
             onDismiss = { loginViewModel.loginResponse.value = null },
             onConfirm = {
                 loginViewModel.loginResponse.value = null
@@ -132,7 +132,7 @@ fun LoginScreen(navController: NavController, googleLoginViewModel: GoogleLoginV
     if (googleLoginResponse != null){
         Modal(
             title = "Login Successful",
-            message = "You have successfully logged in with email: ${googleLoginResponse!!.email}",
+            message = "Login successful!",
             onDismiss = { googleLoginViewModel.loginResponse.value = null },
             onConfirm = {
                 googleLoginViewModel.loginResponse.value = null
@@ -153,7 +153,7 @@ fun LoginScreen(navController: NavController, googleLoginViewModel: GoogleLoginV
     if (facebookLoginResponse != null){
         Modal(
             title = "Login Successful",
-            message = "You have successfully logged in with email: ${facebookLoginResponse!!.email}",
+            message = "Login successful!",
             onDismiss = { facebookLoginViewModel.loginResponse.value = null },
             onConfirm = {
                 facebookLoginViewModel.loginResponse.value = null

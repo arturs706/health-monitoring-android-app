@@ -6,11 +6,12 @@ import uk.co.aipainapp.domain.model.SocialLoginRequest
 
 class GoogleLoginRepositoryImpl(private val apiService: ApiService): GoogleLoginRepository {
     override suspend fun googlelogin(
-        social_id: String,
+        socialId: String,
         email: String,
-        full_name: String
+        fullName: String,
+        authMethod: String
     ): LoginResponse {
-        val loginRequest = SocialLoginRequest(social_id, email, full_name)
+        val loginRequest = SocialLoginRequest(socialId, email, fullName, authMethod)
         return apiService.googlelogin(loginRequest)
     }
 }
